@@ -151,9 +151,9 @@ void CEffects::IceTrail(vec2 Pos, vec2 Vel)
 	p.m_Pos = Pos;
 	p.m_Vel = Vel + RandomDir()*50.0f;
 	p.m_LifeSpan = 0.5f + frandom()*0.5f;
-	p.m_StartSize = 24.0f + frandom()*12;
+	p.m_StartSize = 12.0f + frandom()*6;
 	p.m_EndSize = 0;
-	p.m_Friction = 0.99f;
+	p.m_Friction = 0.90f;
 	p.m_Rot = frandom() * pi*2;
 	p.m_Rotspeed = pi * (4 * frandom()-2);
 	p.m_Gravity = frandom()*500.0f;
