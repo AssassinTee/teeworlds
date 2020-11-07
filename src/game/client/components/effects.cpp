@@ -140,6 +140,26 @@ void CEffects::SkidTrail(vec2 Pos, vec2 Vel)
 	m_pClient->m_pParticles->Add(CParticles::GROUP_GENERAL, &p);
 }
 
+void CEffects::IceTrail(vec2 Pos, vec2 Vel)
+{
+	if(!m_Add100hz)
+		return;
+
+	CParticle p;
+	p.SetDefault();
+	p.m_Spr = SPRITE_PART_ICE01+ (random_int()%4);
+	p.m_Pos = Pos;
+	p.m_Vel = Vel + RandomDir()*50.0f;
+	p.m_LifeSpan = 0.5f + frandom()*0.5f;
+	p.m_StartSize = 24.0f + frandom()*12;
+	p.m_EndSize = 0;
+	p.m_Friction = 0.7f;
+	p.m_Gravity = frandom()*500.0f;
+	float blueness = 0.25f*frandom();
+	p.m_Color = vec4(0.75f+blueness, 0.75f+blueness, 1.0f,0.75f);
+	m_pClient->m_pParticles->Add(CParticles::GROUP_GENERAL, &p);
+}
+
 void CEffects::BulletTrail(vec2 Pos)
 {
 	if(!m_Add100hz)
