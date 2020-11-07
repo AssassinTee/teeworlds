@@ -153,7 +153,9 @@ void CEffects::IceTrail(vec2 Pos, vec2 Vel)
 	p.m_LifeSpan = 0.5f + frandom()*0.5f;
 	p.m_StartSize = 24.0f + frandom()*12;
 	p.m_EndSize = 0;
-	p.m_Friction = 0.7f;
+	p.m_Friction = 0.99f;
+	p.m_Rot = frandom() * pi*2;
+	p.m_Rotspeed = pi * (4 * frandom()-2);
 	p.m_Gravity = frandom()*500.0f;
 	float blueness = 0.25f*frandom();
 	p.m_Color = vec4(0.75f+blueness, 0.75f+blueness, 1.0f,0.75f);
