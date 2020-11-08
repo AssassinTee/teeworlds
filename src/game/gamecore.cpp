@@ -194,13 +194,18 @@ void CCharacterCore::Tick(bool UseInput)
 		// make sure that the hook doesn't go though the ground
 		bool GoingToHitGround = false;
 		bool GoingToRetract = false;
+		int HitMaterial = 0; //default material
 		int Hit = m_pCollision->IntersectLine(m_HookPos, NewPos, &NewPos, 0);
 		if(Hit)
 		{
 			if(Hit&CCollision::COLFLAG_NOHOOK)
 				GoingToRetract = true;
 			else
+			{
 				GoingToHitGround = true;
+				if(Hit&CCollision::COLFLAG_ICE)
+					HitMaterial |= MATERIALFLAG_ICE;
+			}
 		}
 
 		// Check against other players first
@@ -233,6 +238,7 @@ void CCharacterCore::Tick(bool UseInput)
 			if(GoingToHitGround)
 			{
 				m_TriggeredEvents |= COREEVENTFLAG_HOOK_ATTACH_GROUND;
+				m_TriggeredEvents |= (HitMaterial << 16);
 				m_HookState = HOOK_GRABBED;
 			}
 			else if(GoingToRetract)
