@@ -400,7 +400,7 @@ void CGameClient::OnInit()
 	m_pEditor->Init();
 	m_pMenus->RenderLoading(2);
 
-	OnReset();	
+	OnReset();
 
 	m_ServerMode = SERVERMODE_PURE;
 
@@ -1109,7 +1109,12 @@ void CGameClient::ProcessTriggeredEvents(int Events, vec2 Pos)
 	if(Events&COREEVENTFLAG_HOOK_ATTACH_PLAYER)
 		m_pSounds->PlayAt(CSounds::CHN_WORLD, SOUND_HOOK_ATTACH_PLAYER, 1.0f, Pos);
 	if(Events&COREEVENTFLAG_HOOK_ATTACH_GROUND)
-		m_pSounds->PlayAt(CSounds::CHN_WORLD, SOUND_HOOK_ATTACH_GROUND, 1.0f, Pos);
+	{
+		if(Events&(MATERIALFLAG_ICE << 16))
+			m_pSounds->PlayAt(CSounds::CHN_WORLD, SOUND_HOOK_ATTACH_ICE_GROUND, 1.0f, Pos);
+		else
+			m_pSounds->PlayAt(CSounds::CHN_WORLD, SOUND_HOOK_ATTACH_GROUND, 1.0f, Pos);
+	}
 	if(Events&COREEVENTFLAG_HOOK_HIT_NOHOOK)
 		m_pSounds->PlayAt(CSounds::CHN_WORLD, SOUND_HOOK_NOATTACH, 1.0f, Pos);
 	/*if(Events&COREEVENTFLAG_HOOK_LAUNCH)
@@ -1312,7 +1317,7 @@ void CGameClient::OnNewSnapshot()
 							EvolveCharacter(&pCharInfo->m_Prev, EvolvePrevTick);
 						if(pCharInfo->m_Cur.m_Tick)
 							EvolveCharacter(&pCharInfo->m_Cur, EvolveCurTick);
-						
+
 						m_aClients[Item.m_ID].m_Evolved = m_Snap.m_aCharacters[Item.m_ID].m_Cur;
 					}
 
