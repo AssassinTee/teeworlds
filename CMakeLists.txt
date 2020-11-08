@@ -525,6 +525,9 @@ set(EXPECTED_DATA
   audio/hook_attach-01.wv
   audio/hook_attach-02.wv
   audio/hook_attach-03.wv
+  audio/hook_attach_ice-01.wv
+  audio/hook_attach_ice-02.wv
+  audio/hook_attach_ice-03.wv
   audio/hook_loop-01.wv
   audio/hook_loop-02.wv
   audio/hook_noattach-01.wv
