@@ -91,6 +91,7 @@ void CCharacterCore::Tick(bool UseInput)
 
 	vec2 TargetDirection = normalize(vec2(m_Input.m_TargetX, m_Input.m_TargetY));
 
+	m_VelPrev = m_Vel;
 	m_Vel.y += m_pWorld->m_Tuning.m_Gravity;
 
 	float MaxSpeed = Grounded ? m_pWorld->m_Tuning.m_GroundControlSpeed : m_pWorld->m_Tuning.m_AirControlSpeed;
@@ -365,12 +366,18 @@ void CCharacterCore::Move()
 
 	float RampValue = VelocityRamp(length(m_Vel)*50, m_pWorld->m_Tuning.m_VelrampStart, m_pWorld->m_Tuning.m_VelrampRange, m_pWorld->m_Tuning.m_VelrampCurvature);
 
-	m_Vel.x = m_Vel.x*RampValue;
+	vec2 VelNext = m_Vel;
+	VelNext.x = m_Vel.x*RampValue;
+	if(length(m_VelPrev) > length(VelNext))
+		m_Vel = m_VelPrev;
+	else
+		m_Vel = VelNext;
 
 	vec2 NewPos = m_Pos;
 	m_pCollision->MoveBox(&NewPos, &m_Vel, vec2(PHYS_SIZE, PHYS_SIZE), 0, &m_Death);
 
 	m_Vel.x = m_Vel.x*(1.0f/RampValue);
+
 
 	if(m_pWorld->m_Tuning.m_PlayerCollision)
 	{

@@ -150,6 +150,7 @@ public:
 	static const float PHYS_SIZE;
 	vec2 m_Pos;
 	vec2 m_Vel;
+	vec2 m_VelPrev;
 
 	vec2 m_HookDragVel;
 
