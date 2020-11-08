@@ -206,6 +206,7 @@ container.sounds.Add(SoundSet("tee_cry", FileList("audio/vo_teefault_cry-%02d.wv
 container.sounds.Add(SoundSet("hook_loop", FileList("audio/hook_loop-%02d.wv", 2)))
 
 container.sounds.Add(SoundSet("hook_attach_ground", FileList("audio/hook_attach-%02d.wv", 3)))
+container.sounds.Add(SoundSet("hook_attach_ice_ground", FileList("audio/hook_attach_ice-%02d.wv", 3)))
 container.sounds.Add(SoundSet("hook_attach_player", FileList("audio/foley_body_impact-%02d.wv", 3)))
 container.sounds.Add(SoundSet("hook_noattach", FileList("audio/hook_noattach-%02d.wv", 2)))
 container.sounds.Add(SoundSet("pickup_health", FileList("audio/sfx_pickup_hrt-%02d.wv", 2)))
